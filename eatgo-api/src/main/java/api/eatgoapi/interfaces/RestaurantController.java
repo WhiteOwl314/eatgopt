@@ -17,19 +17,18 @@ public class RestaurantController {
     @Autowired
     private MenuItemRepository menuItemRepository;
 
+    //List
     @GetMapping("/restaurants")
     public List<Restaurant> list(){
         List<Restaurant> restaurants = restaurantService.getRestaurants() ;
         return restaurants;
     }
 
+    //Detail
     @GetMapping("/restaurants/{id}")
-    public Restaurant detail(@PathVariable Long id){
+    public Restaurant detail(@PathVariable("id") Long id){
         //기본정보 + 메뉴정보
         Restaurant restaurant = restaurantService.getRestaurant(id);
-
-        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
-        restaurant.setMenuItem(menuItems);
 
          return restaurant;
     }
