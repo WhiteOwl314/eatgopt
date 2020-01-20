@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface RestaurantRepository {
     List<Restaurant> findAll();
-    Restaurant findMyId(Long id);
+    Restaurant findById(Long id);
 }

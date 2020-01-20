@@ -21,7 +21,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public Restaurant findMyId(Long id) {
+    public Restaurant findById(Long id) {
         return restaurants.stream().filter(r -> r.getId().equals(id)).findFirst().orElse(null);
     }
 }
