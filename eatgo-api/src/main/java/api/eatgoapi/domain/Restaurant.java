@@ -29,7 +29,7 @@ public class Restaurant {
         }
     }
 
-    private void addMenuItem(MenuItem menuItem) {
+    public void addMenuItem(MenuItem menuItem) {
         menuItems.add(menuItem);
     }
 }

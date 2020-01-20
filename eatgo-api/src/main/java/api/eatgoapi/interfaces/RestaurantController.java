@@ -14,8 +14,6 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
-    @Autowired
-    private MenuItemRepository menuItemRepository;
 
     //List
     @GetMapping("/restaurants")
