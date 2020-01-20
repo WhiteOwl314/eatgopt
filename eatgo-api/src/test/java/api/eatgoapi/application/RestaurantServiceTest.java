@@ -1,8 +1,6 @@
 package api.eatgoapi.application;
 
-import api.eatgoapi.domain.Restaurant;
-import api.eatgoapi.domain.RestaurantRepository;
-import api.eatgoapi.domain.RestaurantRepositoryImpl;
+import api.eatgoapi.domain.*;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,11 +14,13 @@ class RestaurantServiceTest {
 
     private RestaurantService restaurantService;
     private RestaurantRepository restaurantRepository;
+    private MenuItemRepository menuItemRepository;
 
     @BeforeEach
     public void setUp(){
         restaurantRepository = new RestaurantRepositoryImpl();
-        restaurantService = new RestaurantService(restaurantRepository);
+        menuItemRepository = new MenuItemRepositoryImpl();
+        restaurantService = new RestaurantService(restaurantRepository, menuItemRepository);
     }
 
     @Test
@@ -36,5 +36,9 @@ class RestaurantServiceTest {
         Restaurant restaurant = restaurantService.getRestaurant(1004L);
 
         assertThat(restaurant.getId()).isEqualTo(1004L);
+
+        MenuItem menuItem = restaurant.getMenuItems().get(0);
+
+        assertThat(menuItem.getName()).isEqualTo("Kimchi");
     }
 }

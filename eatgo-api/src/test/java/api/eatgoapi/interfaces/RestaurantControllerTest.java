@@ -1,5 +1,6 @@
 package api.eatgoapi.interfaces;
 
+import api.eatgoapi.application.RestaurantService;
 import api.eatgoapi.domain.MenuItemRepository;
 import api.eatgoapi.domain.MenuItemRepositoryImpl;
 import api.eatgoapi.domain.RestaurantRepository;
@@ -27,6 +28,9 @@ class RestaurantControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @SpyBean(RestaurantService.class)
+    private RestaurantService restaurantService;
 
     @SpyBean(RestaurantRepositoryImpl.class)
     private RestaurantRepository restaurantRepository;

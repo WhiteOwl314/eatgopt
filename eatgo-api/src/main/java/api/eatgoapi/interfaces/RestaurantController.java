@@ -14,6 +14,8 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
+    @Autowired
+    private MenuItemRepository menuItemRepository;
 
     @GetMapping("/restaurants")
     public List<Restaurant> list(){
@@ -26,10 +28,8 @@ public class RestaurantController {
         //기본정보 + 메뉴정보
         Restaurant restaurant = restaurantService.getRestaurant(id);
 
-//        Restaurant restaurant = restaurantRepository.findById(id);
-//
-//        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
-//        restaurant.setMenuItem(menuItems);
+        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
+        restaurant.setMenuItem(menuItems);
 
          return restaurant;
     }

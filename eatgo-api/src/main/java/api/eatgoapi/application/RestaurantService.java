@@ -1,5 +1,7 @@
 package api.eatgoapi.application;
 
+import api.eatgoapi.domain.MenuItem;
+import api.eatgoapi.domain.MenuItemRepository;
 import api.eatgoapi.domain.Restaurant;
 import api.eatgoapi.domain.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,12 @@ public class RestaurantService {
     @Autowired
     RestaurantRepository restaurantRepository;
 
-    public RestaurantService(RestaurantRepository restaurantRepository) {
+    @Autowired
+    MenuItemRepository menuItemRepository;
+
+    public RestaurantService(RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository) {
         this.restaurantRepository = restaurantRepository;
+        this.menuItemRepository = menuItemRepository;
     }
 
     public List<Restaurant> getRestaurants() {
@@ -27,6 +33,9 @@ public class RestaurantService {
     public Restaurant getRestaurant(Long id){
 
         Restaurant restaurant = restaurantRepository.findById(id);
+
+        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
+        restaurant.setMenuItems(menuItems);
 
         return restaurant;
     }
