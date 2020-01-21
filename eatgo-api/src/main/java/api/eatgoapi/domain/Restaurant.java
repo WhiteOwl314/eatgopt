@@ -1,14 +1,16 @@
 package api.eatgoapi.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
 @Data
+@NoArgsConstructor
 public class Restaurant {
-    private  final Long id;
+    private  Long id;
     private  String name;
     private  String address;
     private List<MenuItem> menuItems = new ArrayList<>();
