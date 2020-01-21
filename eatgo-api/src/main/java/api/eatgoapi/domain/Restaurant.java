@@ -15,6 +15,11 @@ public class Restaurant {
     private  String address;
     private List<MenuItem> menuItems = new ArrayList<>();
 
+    public Restaurant(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
     public Restaurant(Long id, String name, String address) {
         this.id = id;
         this.name = name;
