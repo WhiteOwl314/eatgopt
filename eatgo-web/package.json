@@ -4,7 +4,7 @@
   "description": "Eatgo Web Project",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --port 3000",
     "test": "jest"
   },
   "author": "WhiteOwl",
