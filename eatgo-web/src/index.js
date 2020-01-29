@@ -5,5 +5,8 @@
 
 
     const element = document.getElementById('app');
-    element.innerHTML = JSON.stringify(restaurants)
+    element.innerHTML = `
+        ${restaurants[0].id}
+        ${restaurants[0].name}
+    `;
 })();
