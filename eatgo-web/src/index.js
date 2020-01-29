@@ -6,7 +6,12 @@
 
     const element = document.getElementById('app');
     element.innerHTML = `
-        ${restaurants[0].id}
-        ${restaurants[0].name}
+       ${restaurants.map(restaurant =>`
+           <p>
+                ${restaurant.id}
+                ${restaurant.name}
+                ${restaurant.address}
+            </p>
+       `).join('')}
     `;
 })();

@@ -23,8 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -78,7 +77,6 @@ class RestaurantControllerTest {
 
     @Test
     public void create() throws Exception {
-        Restaurant restaurant = new Restaurant(1234L,"BeRyong", "Seoul");
         mvc.perform(post("/restaurants")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
@@ -86,9 +84,22 @@ class RestaurantControllerTest {
                         "  \"address\": \"Busan\"\n" +
                         "}"))
                 .andExpect(status().isCreated())
-                .andExpect(header().string("location", "/restaurants/1234"))
                 .andExpect(content().string("{}"));
 
-        verify(restaurantService).addRestaurant(any());
+        Restaurant restaurant = new Restaurant("BeRyong", "Busan");
+        verify(restaurantService).addRestaurant(restaurant);
+    }
+
+    @Test
+    public void update() throws Exception {
+        mvc.perform(patch("/restaurants/1004 ")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\n" +
+                        "  \"name\": \"JOKER Bar\",\n" +
+                        "  \"address\": \"Busan\"\n" +
+                        "}"))
+                .andExpect(status().isOk());
+
+        verify(restaurantService).updateRestaurant(1004L, "JOKER Bar", "Busan");
     }
 }
