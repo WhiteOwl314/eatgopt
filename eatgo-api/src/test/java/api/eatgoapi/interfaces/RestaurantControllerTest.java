@@ -42,7 +42,12 @@ class RestaurantControllerTest {
     @Test
     public void list() throws Exception{
         List<Restaurant> restaurants = new ArrayList<>();
-        restaurants.add(new Restaurant(1004L, "Bob zip", "Seoul"));
+        restaurants.add(
+                Restaurant.builder()
+                .id(1004L)
+                .name("Bob zip")
+                .address( "Seoul").build()
+        );
 
         given(restaurantService.getRestaurants()).willReturn(restaurants);
 
@@ -54,10 +59,18 @@ class RestaurantControllerTest {
 
     @Test
     public void detail() throws Exception{
-        Restaurant restaurant1 = new Restaurant(1004L,"JOKER house","Seoul");
+        Restaurant restaurant1 = Restaurant.builder()
+                .id(1004L)
+                .name("JOKER house")
+                .address("Seoul")
+                .build();
         restaurant1.setMenuItems(Arrays.asList(new MenuItem("Kimchi")));
 
-        Restaurant restaurant2 = new Restaurant(2020L,"Cyber Food", "Seoul");
+        Restaurant restaurant2 = Restaurant.builder()
+                .id(2020L)
+                .name("Cyber Food")
+                .address("Seoul")
+                .build();
 
 
         given(restaurantService.getRestaurant(1004L)).willReturn(restaurant1);
@@ -87,7 +100,10 @@ class RestaurantControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().string("{}"));
 
-        Restaurant restaurant = new Restaurant("BeRyong", "Busan");
+        Restaurant restaurant = Restaurant.builder()
+                .name("BeRyong")
+                .address("Busan")
+                .build();
         verify(restaurantService).addRestaurant(restaurant);
     }
 
