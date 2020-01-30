@@ -1,5 +1,7 @@
 package api.eatgoapi.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +15,9 @@ import java.util.Queue;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 public class Restaurant {
     @Id
     @GeneratedValue
@@ -23,7 +27,7 @@ public class Restaurant {
     private  String address;
 
     @Transient
-    private List<MenuItem> menuItems = new ArrayList<>();
+    private List<MenuItem> menuItems ;
 
     public Restaurant(String name, String address) {
         this.name = name;
@@ -41,17 +45,13 @@ public class Restaurant {
     }
 
     public void setMenuItem(List<MenuItem> menuItems) {
-        for(MenuItem menuItem : menuItems){
-            addMenuItem(menuItem);
-        }
+        this.menuItems = new ArrayList<>(menuItems);
     }
 
-    public void addMenuItem(MenuItem menuItem) {
-        menuItems.add(menuItem);
-    }
 
     public void updateInformation(String name, String address) {
         this.name = name;
         this.address = address;
     }
+
 }
