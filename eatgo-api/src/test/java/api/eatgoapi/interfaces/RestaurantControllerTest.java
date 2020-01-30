@@ -91,7 +91,7 @@ class RestaurantControllerTest {
     }
 
     @Test
-    public void create() throws Exception {
+    public void createWithValidData() throws Exception {
         mvc.perform(post("/restaurants")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
@@ -109,7 +109,19 @@ class RestaurantControllerTest {
     }
 
     @Test
-    public void update() throws Exception {
+    public void createWithInvalidData() throws Exception {
+
+        mvc.perform(post("/restaurants")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\n" +
+                        "  \"name\": \"\",\n" +
+                        "  \"address\": \"\"\n" +
+                        "}"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void updateWhithValidData() throws Exception {
         mvc.perform(patch("/restaurants/1004 ")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
@@ -119,5 +131,27 @@ class RestaurantControllerTest {
                 .andExpect(status().isOk());
 
         verify(restaurantService).updateRestaurant(1004L, "JOKER Bar", "Busan");
+    }
+
+    @Test
+    public void updateWhithInvalidData() throws Exception {
+        mvc.perform(patch("/restaurants/1004 ")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\n" +
+                        "  \"name\": \"\",\n" +
+                        "  \"address\": \"\"\n" +
+                        "}"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void updateWhithoutName() throws Exception {
+        mvc.perform(patch("/restaurants/1004 ")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\n" +
+                        "  \"name\": \"\",\n" +
+                        "  \"address\": \"Busan\"\n" +
+                        "}"))
+                .andExpect(status().isBadRequest());
     }
 }
