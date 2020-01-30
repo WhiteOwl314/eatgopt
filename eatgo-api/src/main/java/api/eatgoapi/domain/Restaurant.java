@@ -1,5 +1,6 @@
 package api.eatgoapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Restaurant {
     private  String address;
 
     @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<MenuItem> menuItems ;
 
     public Restaurant(String name, String address) {
