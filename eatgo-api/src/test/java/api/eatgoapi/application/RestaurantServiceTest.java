@@ -2,8 +2,10 @@ package api.eatgoapi.application;
 
 import api.eatgoapi.domain.*;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -66,7 +68,7 @@ class RestaurantServiceTest {
     }
 
     @Test
-    public void getRestaurant(){
+    public void getRestaurantWithExisted(){
         Restaurant restaurant = restaurantService.getRestaurant(1004L);
 
         assertThat(restaurant.getId()).isEqualTo(1004L);
@@ -74,6 +76,22 @@ class RestaurantServiceTest {
         MenuItem menuItem = restaurant.getMenuItems().get(0);
 
         assertThat(menuItem.getName()).isEqualTo("Kimchi");
+    }
+
+    @Test
+    public void getRestaurantWithNotExisted() {
+
+
+        Exception exception = assertThrows(
+                RestaurantNotFoundException.class, () -> restaurantService.getRestaurant(404L)
+        );
+
+        assertTrue(exception.getMessage().contains("Could not find restaurant404"));
+
+    }
+
+    String findById(Long id) throws RestaurantNotFoundException{
+        throw new RestaurantNotFoundException(id);
     }
 
     @Test
