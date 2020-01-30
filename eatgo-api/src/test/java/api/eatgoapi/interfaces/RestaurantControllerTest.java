@@ -64,7 +64,8 @@ class RestaurantControllerTest {
                 .name("JOKER house")
                 .address("Seoul")
                 .build();
-        restaurant1.setMenuItems(Arrays.asList(new MenuItem("Kimchi")));
+        restaurant1.setMenuItems(Arrays.asList(MenuItem.builder()
+                .name("Kimchi").build()));
 
         Restaurant restaurant2 = Restaurant.builder()
                 .id(2020L)
