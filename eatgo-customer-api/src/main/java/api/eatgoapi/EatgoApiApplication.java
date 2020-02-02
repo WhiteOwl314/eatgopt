@@ -1,13 +1,13 @@
-package com.example.eatgocustomerapi;
+package api.eatgoapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EatgoCustomerApiApplication {
+public class EatgoApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EatgoCustomerApiApplication.class, args);
+        SpringApplication.run(EatgoApiApplication.class, args);
     }
 
 }

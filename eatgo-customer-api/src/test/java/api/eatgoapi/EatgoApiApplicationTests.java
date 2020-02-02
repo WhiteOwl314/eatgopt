@@ -1,10 +1,10 @@
-package com.example.eatgocustomerapi;
+package api.eatgoapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EatgoCustomerApiApplicationTests {
+class EatgoApiApplicationTests {
 
     @Test
     void contextLoads() {
