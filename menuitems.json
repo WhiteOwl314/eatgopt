@@ -1,8 +1,10 @@
 [
   {
+    "restaurantId": 1,
     "name": "Kimchi"
   },
   {
+    "restaurantId": 1,
     "name": "Gukbob"
   }
 ]
