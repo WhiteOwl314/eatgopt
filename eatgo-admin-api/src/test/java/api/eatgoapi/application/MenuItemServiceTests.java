@@ -2,8 +2,8 @@ package api.eatgoapi.application;
 
 import api.eatgoapi.domain.MenuItem;
 import api.eatgoapi.domain.MenuItemRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -25,7 +25,7 @@ public class MenuItemServiceTests {
     @Mock
     private MenuItemRepository menuItemRepository;
 
-    @Before
+    @BeforeEach
     public void setUp(){
         MockitoAnnotations.initMocks(this);
         menuItemService = new MenuItemService(menuItemRepository);

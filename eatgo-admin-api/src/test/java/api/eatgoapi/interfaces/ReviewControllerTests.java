@@ -2,8 +2,7 @@ package api.eatgoapi.interfaces;
 
 import api.eatgoapi.application.ReviewService;
 import api.eatgoapi.domain.Review;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(ReviewController.class)
 public class ReviewControllerTests {
 

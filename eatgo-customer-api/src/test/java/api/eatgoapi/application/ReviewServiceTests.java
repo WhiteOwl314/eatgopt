@@ -2,8 +2,8 @@ package api.eatgoapi.application;
 
 import api.eatgoapi.domain.Review;
 import api.eatgoapi.domain.ReviewRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -17,7 +17,7 @@ public class ReviewServiceTests {
     @Mock
     private ReviewRepository reviewRepository;
 
-    @Before
+    @BeforeEach
     public void setUp(){
         MockitoAnnotations.initMocks(this);
         reviewService = new ReviewService(reviewRepository);
