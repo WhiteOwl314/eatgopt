@@ -7,12 +7,15 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -26,6 +29,25 @@ public class MenuItemServiceTests {
     public void setUp(){
         MockitoAnnotations.initMocks(this);
         menuItemService = new MenuItemService(menuItemRepository);
+    }
+
+    @Test
+    public void getMenuItems(){
+
+        List<MenuItem> mockMenuItemList = new ArrayList<>();
+        mockMenuItemList.add(MenuItem.builder()
+                .restaurantId(1004L)
+                .name("Kimchi")
+                .build());
+
+        given(menuItemRepository.findAllByRestaurantId(1004L))
+                .willReturn(mockMenuItemList);
+
+        List<MenuItem> menuItems = menuItemService.getMenuitems(1004L);
+
+        MenuItem menuItem = menuItems.get(0);
+
+        assertThat(menuItem.getName()).isEqualTo("Kimchi");
     }
 
     @Test

@@ -26,6 +26,7 @@ public class MenuItemControllerTests {
     @MockBean
     private MenuItemService menuItemService;
 
+
     @Test
     public void bulkUpdate() throws Exception {
         mvc.perform(patch("/restaurants/1/menuitems")
