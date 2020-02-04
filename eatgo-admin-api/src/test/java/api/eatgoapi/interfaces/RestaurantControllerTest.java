@@ -32,8 +32,6 @@ class RestaurantControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    //가짜로 투입. SpyBean 은 진짜
-    //Repository를 사용하지 않기 때문에 아래 빈들은 다 지움
     @MockBean
     private RestaurantService restaurantService;
 
