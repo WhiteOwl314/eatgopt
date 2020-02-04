@@ -1,6 +1,5 @@
 package api.eatgoapi.interfaces;
 
-import antlr.build.Tool;
 import api.eatgoapi.application.RegionService;
 import api.eatgoapi.domain.Region;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -44,23 +42,5 @@ class RegionControllerTests {
                 .andExpect(content().string(containsString("Seoul")));
 
 
-    }
-
-    @Test
-    public void create() throws Exception {
-
-        Region region = Region.builder()
-                .name("Seoul").build();
-        given(regionService.addRegion(("Seoul"))).willReturn(region);
-
-        mvc.perform(MockMvcRequestBuilders.post("/regions")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\n" +
-                        "  \"name\": \"Seoul\"\n" +
-                        "}"))
-                .andExpect(status().isCreated())
-                .andExpect(content().string("{}"));
-
-        verify(regionService).addRegion("Seoul");
     }
 }
