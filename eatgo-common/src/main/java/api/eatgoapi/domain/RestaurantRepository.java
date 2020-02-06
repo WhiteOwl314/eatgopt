@@ -12,4 +12,5 @@ public interface RestaurantRepository extends CrudRepository<Restaurant, Long> {
 
     Restaurant save(Restaurant restaurant);
 
+    List<Restaurant> findAllByAddressContaining(String region);
 }
