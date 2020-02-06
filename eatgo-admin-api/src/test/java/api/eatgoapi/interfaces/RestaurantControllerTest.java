@@ -40,6 +40,7 @@ class RestaurantControllerTest {
         List<Restaurant> restaurants = new ArrayList<>();
         restaurants.add(
                 Restaurant.builder()
+                        .categoryId(1L)
                 .id(1004L)
                 .name("Bob zip")
                 .address( "Seoul").build()
@@ -57,6 +58,7 @@ class RestaurantControllerTest {
     public void detailWithExisted() throws Exception{
         Restaurant restaurant = Restaurant.builder()
                 .id(1004L)
+                .categoryId(1L)
                 .name("JOKER house")
                 .address("Seoul")
                 .build();
@@ -82,20 +84,31 @@ class RestaurantControllerTest {
 
     @Test
     public void createWithValidData() throws Exception {
+        //유효한 데이터로 추가하기
+
+        //가정 추가
+        given(restaurantService.addRestaurant(any())).will(invocation -> {
+           Restaurant restaurant = invocation.getArgument(0);
+           return Restaurant.builder()
+                   .id(1234L)
+                   .categoryId(1L)
+                   .name(restaurant.getName())
+                   .address(restaurant.getAddress())
+                   .build();
+        });
+
         mvc.perform(post("/restaurants")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
+                        "  \"categoryId\":1,\n" +
                         "  \"name\": \"BeRyong\",\n" +
                         "  \"address\": \"Busan\"\n" +
                         "}"))
                 .andExpect(status().isCreated())
+                .andExpect(header().string("location","/restaurants/1234"))
                 .andExpect(content().string("{}"));
 
-        Restaurant restaurant = Restaurant.builder()
-                .name("BeRyong")
-                .address("Busan")
-                .build();
-        verify(restaurantService).addRestaurant(restaurant);
+        verify(restaurantService).addRestaurant(any());
     }
 
     @Test
@@ -115,6 +128,7 @@ class RestaurantControllerTest {
         mvc.perform(patch("/restaurants/1004 ")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
+                        "  \"categoryId\": 1, \n" +
                         "  \"name\": \"JOKER Bar\",\n" +
                         "  \"address\": \"Busan\"\n" +
                         "}"))

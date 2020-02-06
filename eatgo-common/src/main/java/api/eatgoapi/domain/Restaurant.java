@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
@@ -24,6 +25,9 @@ public class Restaurant {
     @Id
     @GeneratedValue
     private  Long id;
+
+    @NotNull
+    private Long categoryId;
 
     @NotEmpty
     private  String name;
