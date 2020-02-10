@@ -2,6 +2,7 @@ package api.eatgoapi.interfaces;
 
 import api.eatgoapi.application.UserService;
 import api.eatgoapi.domain.User;
+import api.eatgoapi.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,8 @@ import java.net.URISyntaxException;
 public class SessionController {
 
     @Autowired
+    private JwtUtil jwtUtil;
+    @Autowired
     private UserService userService;
 
     @PostMapping("/session")
@@ -27,7 +30,7 @@ public class SessionController {
 
         User user = userService.authenticate(email, password);
 
-        String accessToken = user.getAccessToken();
+        String accessToken = jwtUtil.createToken(user.getId(), user.getName());
 
         String url = "/session";
         return ResponseEntity.created(new URI(url))

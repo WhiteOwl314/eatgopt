@@ -4,6 +4,7 @@ import api.eatgoapi.application.EmailNotExistedException;
 import api.eatgoapi.application.PasswordWrongException;
 import api.eatgoapi.application.UserService;
 import api.eatgoapi.domain.User;
+import api.eatgoapi.utils.JwtUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -26,16 +28,25 @@ public class SessionControllerTests {
 
     @MockBean
     private UserService userService;
+    @MockBean
+    private JwtUtil jwtUtil;
 
     @Test
     public void createWithValidAttributes() throws Exception {
+        Long id = 1004L;
+        String name = "tester";
         String email = "tester@example.com";
         String password = "test";
 
         User mockUser = User.builder()
-                .password("ACCESSTOKEN")
+                .id(id)
+                .name(name)
                 .build();
+
         given(userService.authenticate(email,password)).willReturn(mockUser);
+
+        given(jwtUtil.createToken(id, name))
+                .willReturn("header.payload.signiture");
 
         mockMvc.perform(post("/session")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -45,7 +56,8 @@ public class SessionControllerTests {
                         "}"))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", "/session"))
-                .andExpect(content().string("{\"accessToken\":\"ACCESSTOKE\"}"));
+                .andExpect(content().string(
+                        containsString("{\"accessToken\":\"header.payload.signiture\"}")));
 
         verify(userService).authenticate(eq(email),eq(password));
     }
