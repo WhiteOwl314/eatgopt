@@ -6,13 +6,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
 
 public class JwtUtil {
     private Key key ;
 
-    public JwtUtil(String secret) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+    public JwtUtil(String secret) throws UnsupportedEncodingException {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes("utf-8"));
     }
 
     public String createToken(Long userId, String name) {

@@ -25,12 +25,7 @@ public class ReviewServiceTests {
 
     @Test
     public void addReview(){
-        Review review = Review.builder()
-                .name("JOKER")
-                .score(3)
-                .description("Mat It Da")
-                .build();
-        reviewService.addReview(1004L, review);
+        reviewService.addReview(1004L, "JOKER", 3, "Mat It Da");
 
         verify(reviewRepository).save(any());
     }

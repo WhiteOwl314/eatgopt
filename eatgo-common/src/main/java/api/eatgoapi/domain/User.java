@@ -25,7 +25,7 @@ public class User {
 
     @NotEmpty
     private String email;
-    @NotEmpty
+
     private String name;
 
     @NotNull

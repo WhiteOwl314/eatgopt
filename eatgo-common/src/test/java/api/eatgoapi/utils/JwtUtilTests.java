@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.UnsupportedEncodingException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.StringContains.containsString;
@@ -14,7 +16,7 @@ class JwtUtilTests {
     JwtUtil jwtUtil;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() throws UnsupportedEncodingException {
 
         jwtUtil = new JwtUtil(SECRET);
     }

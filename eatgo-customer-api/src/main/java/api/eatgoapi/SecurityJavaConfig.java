@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.servlet.Filter;
+import java.io.UnsupportedEncodingException;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +45,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JwtUtil jwtUtil(){
+    public JwtUtil jwtUtil() throws UnsupportedEncodingException {
         return new JwtUtil(secret);
     }
 }
