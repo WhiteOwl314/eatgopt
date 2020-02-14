@@ -4,6 +4,7 @@ import api.eatgoapi.application.EmailNotExistedException;
 import api.eatgoapi.application.PasswordWrongException;
 import api.eatgoapi.application.UserService;
 import api.eatgoapi.domain.User;
+import api.eatgoapi.interfaces.SessionController;
 import api.eatgoapi.utils.JwtUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.core.StringContains.containsString;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(SessionController.class)
-public class SessionControllerTests {
+class SessionControllerTest {
 
     @Autowired
     MockMvc mockMvc;

@@ -3,3 +3,5 @@ rootProject.name = 'eatgopt'
 include 'eatgo-common'
 include 'eatgo-admin-api'
 include 'eatgo-customer-api'
+include 'eqtgo-login-api'
+
