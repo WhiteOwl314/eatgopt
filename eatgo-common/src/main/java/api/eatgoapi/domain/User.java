@@ -6,9 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "User")
 public class User {
 
     @Id
@@ -27,6 +26,9 @@ public class User {
     private String email;
 
     private String name;
+
+    @Column(name = "Restaurant_Id")
+    private Long restaurantId;
 
     @NotNull
     private Long level;
@@ -45,4 +47,13 @@ public class User {
         level = 0L;
     }
 
+    public boolean isRestaurantOwner() {
+        return level == 50L;
+    }
+
+    public void setRestaurantId(Long restaurantId){
+        this.level = 50L;
+        this.restaurantId = restaurantId;
+
+    }
 }
