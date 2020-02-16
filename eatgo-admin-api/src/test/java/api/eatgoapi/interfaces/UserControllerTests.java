@@ -2,7 +2,6 @@ package api.eatgoapi.interfaces;
 
 import api.eatgoapi.application.UserService;
 import api.eatgoapi.domain.User;
-import org.apache.catalina.Group;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.StringContains.containsString;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
