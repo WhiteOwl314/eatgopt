@@ -1,6 +1,7 @@
 package api.eatgoapi.interfaces;
 
 import api.eatgoapi.application.ReservationService;
+import api.eatgoapi.domain.Reservation;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -9,7 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,11 +30,10 @@ class ReservationControllerTests {
     public void create() throws Exception {
         String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEwMDQsIm5hbWUiOiJKb2huIn0.8hm6ZOJykSINHxL-rf0yV882fApL3hyQ9-WGlJUyo2A";
 
-        Long userId = 1004L;
-        String name = "John";
-        String date = "2019-12-24";
-        String time = "20:00";
-        Integer partySize = 20;
+
+        Reservation mockReservation = Reservation.builder().id(12L).build();
+        given(reservationService.addReservation(any(), any(), any(), any(), any(), any()))
+                .willReturn(mockReservation);
 
         mvc.perform(
                 MockMvcRequestBuilders
@@ -44,6 +46,12 @@ class ReservationControllerTests {
                         "  \"partySize\": 20\n" +
                         "}") )
                 .andExpect(status().isCreated());
+
+        Long userId = 1004L;
+        String name = "John";
+        String date = "2019-12-24";
+        String time = "20:00";
+        Integer partySize = 20;
 
         verify(reservationService)
                 .addReservation(

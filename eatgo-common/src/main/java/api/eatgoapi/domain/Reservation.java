@@ -21,6 +21,8 @@ public class Reservation {
 
     private Long userId;
 
+    private Long restaurantId;
+
     private String name;
 
     @NotEmpty
